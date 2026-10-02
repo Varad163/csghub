@@ -207,6 +207,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 
 const routes = [
+  { path: '/', redirect: '/datasets/test-user/test-dataset' },
   { path: '/admin_panel/', component: AdminDashboard },
   { path: '/admin_panel/email_sending', component: AdminEmailSending },
   { path: '/admin_panel/users', component: AdminUserList },

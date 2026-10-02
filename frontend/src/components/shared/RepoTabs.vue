@@ -198,6 +198,15 @@
         ></McpSchema>
       </template>
 
+      <!-- dataset preview -->
+      <template #preview>
+        <DatasetExplorer
+          :namespacePath="path"
+          :currentBranch="currentBranch || repoDetail.defaultBranch"
+          :repoType="repoType"
+        />
+      </template>
+
       <!-- community -->
       <template #community>
         <community-page
@@ -324,6 +333,7 @@
   import CommunityPage from '../community/CommunityPage.vue'
   import ModelSettings from '../models/ModelSettings.vue'
   import DatasetSettings from '../datasets/DatasetSettings.vue'
+  import DatasetExplorer from '../datasets/DatasetExplorer.vue'
   import ApplicationSpaceSettings from '../application_spaces/ApplicationSpaceSettings.vue'
   import CodeSettings from '../codes/CodeSettings.vue'
   import SkillSettings from '../skills/SkillSettings.vue'

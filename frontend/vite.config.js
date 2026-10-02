@@ -4,7 +4,9 @@ import fs from "fs";
 import vue from "@vitejs/plugin-vue";
 
 function getHtmlEntryFiles(srcDir) {
-  const entry = {};
+  const entry = {
+    index: path.resolve(__dirname, "index.html")
+  };
 
   function traverseDir(currentDir) {
     const files = fs.readdirSync(currentDir);

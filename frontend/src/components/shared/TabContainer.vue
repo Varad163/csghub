@@ -25,6 +25,17 @@
         <slot name="analysis"></slot>
       </el-tab-pane>
 
+      <!-- dataset preview -->
+      <el-tab-pane
+        v-if="repoType === 'dataset'"
+        label="Data Preview"
+        name="preview"
+        class="min-h-[300px]"
+        lazy
+      >
+        <slot name="preview"></slot>
+      </el-tab-pane>
+
       <!-- repo files -->
       <el-tab-pane
         v-if="showFiles"
@@ -162,6 +173,9 @@
     } 
     if (props.repoType === 'mcp') {
       baseTabs.push('schema')
+    }
+    if (props.repoType === 'dataset') {
+      baseTabs.push('preview')
     }
     
     return baseTabs

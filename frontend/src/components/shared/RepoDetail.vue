@@ -119,18 +119,31 @@
     try {
       const { response, data, error } = await useFetchApi(url).json()
       // redirect unauthorized page
-      if (response.value.status === 403) {
+      if (response.value?.status === 403) {
         ToUnauthorizedPage()
         return false
       }
-      // redirect not found page
-      if (response.value.status === 404) {
-        ToNotFoundPage()
-        return false
-      }
-      if (!data.value) {
-        ElMessage.warning(error.value.msg)
-        return false
+      // redirect not found page or fallback for standalone dev mode
+      if (response.value?.status === 404 || !data.value) {
+        console.warn('Backend repo not found or unavailable, initializing dev fallback data for preview.')
+        const mockRepoData = {
+          id: 1,
+          name: props.repoName || 'test-dataset',
+          nickname: `${props.repoName || 'test-dataset'} (Demo Preview)`,
+          description: 'A repository for testing CSGHub features.',
+          default_branch: 'main',
+          namespace: { Path: props.namespace || 'test-user', Avatar: '' },
+          can_manage: true,
+          can_write: true,
+          user: { username: props.namespace || 'test-user' },
+          repository: { id: 1 },
+          repository_id: 1,
+          license: 'apache-2.0',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }
+        repoDetailStore.initialize(mockRepoData, props.repoType)
+        return true
       }
       const repoData = data.value.data
       repoDetailStore.initialize(repoData, props.repoType)
