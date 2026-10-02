@@ -3,7 +3,9 @@
     <el-skeleton v-if="loading" :rows="6" animated />
 
     <div v-else-if="!hasMetrics" class="py-12">
-      <el-empty :description="$t('shared.noData') || 'No performance metrics available for these versions'" />
+      <el-empty
+        description="No performance metrics file (metrics.json or eval_results.json) found in these versions. Add a metrics file to your model repository to display performance score comparisons."
+      />
     </div>
 
     <div v-else class="space-y-6">
